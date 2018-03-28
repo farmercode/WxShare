@@ -28,12 +28,12 @@ class WxShare
     public function getSign($url)
     {
         $data = $this->getToken();
-        if (isset($data['errcode'])) {
+        if (isset($data['errcode']) && $data['errcode'] > 0) {
             return $data;
         }
         $token = $data['access_token'];
         $data = $this->getTicket($token);
-        if (isset($data['errcode'])) {
+        if (isset($data['errcode']) && $data['errcode'] > 0) {
             return $data;
         }
         $ticket = $data['ticket'];
