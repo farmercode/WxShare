@@ -2,6 +2,7 @@
   "name" : "fcode/wxshare",
   "description" : "微信分享服务端生成分享所需的签名",
   "type" : "library",
+  "minimum-stability": "stable",
   "license" : "MIT",
   "authors" : [
     {
