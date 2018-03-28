@@ -33,7 +33,7 @@ class WxShare
         }
         $token = $data['access_token'];
         $data = $this->getTicket($token);
-        if (isset($data['errcode']) && $data['errcode'] > 0) {
+        if (!isset($data['ticket'])) {
             return $data;
         }
         $ticket = $data['ticket'];
