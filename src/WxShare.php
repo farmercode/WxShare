@@ -10,6 +10,12 @@ namespace FCode;
 
 use GuzzleHttp\Client;
 
+/**
+ * Class WxShare
+ * 生成微信分享所需的签名信息
+ * @author Wangchangchun
+ * @package FCode
+ */
 class WxShare
 {
     const API_GET_TOKEN = 'https://api.weixin.qq.com/cgi-bin/token';
@@ -25,6 +31,12 @@ class WxShare
         $this->secret = $secret;
     }
     
+    /**
+     * 获得微信分享签名数据
+     * @param string $url
+     *
+     * @return array|mixed
+     */
     public function getSign($url)
     {
         $data = $this->getToken();
@@ -37,7 +49,7 @@ class WxShare
             return $data;
         }
         $ticket = $data['ticket'];
-        $randomSlot = $this->genarateSlot();
+        $randomSlot = $this->genarateRandomString();
         
         $input = [
             'jsapi_ticket' => $ticket,
@@ -58,6 +70,10 @@ class WxShare
         ];
     }
     
+    /**
+     * 获取微信接口所需token
+     * @return mixed
+     */
     public function getToken()
     {
         $params = [
@@ -70,6 +86,12 @@ class WxShare
         return $data;
     }
     
+    /**
+     * 获取ticket信息
+     * @param string $token
+     *
+     * @return mixed
+     */
     public function getTicket($token)
     {
         $params = [
@@ -81,12 +103,23 @@ class WxShare
         return $data;
     }
     
-    private function genarateSlot()
+    /**
+     * 生成随机字符串
+     * @return bool|string
+     */
+    private function genarateRandomString()
     {
         $str = md5(uniqid(date("YmdHIs")));
         return substr($str,8,16);
     }
     
+    /**
+     * GET请求
+     * @param string $url
+     * @param array $params
+     *
+     * @return string
+     */
     private function getRequest($url, $params = [])
     {
         $client = new Client(['timeout' => 5.0]);
