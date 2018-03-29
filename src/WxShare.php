@@ -6,7 +6,7 @@
  * Time: 下午10:35
  */
 
-namespace FCode;
+namespace FCode\WxShare;
 
 use GuzzleHttp\Client;
 
