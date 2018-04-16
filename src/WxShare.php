@@ -16,7 +16,7 @@ use GuzzleHttp\Client;
  * @author Wangchangchun
  * @package FCode
  */
-class WxShare
+class WxShare extends Request
 {
     const API_GET_TOKEN = 'https://api.weixin.qq.com/cgi-bin/token';
     const API_GET_TICKET = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket';
@@ -111,24 +111,5 @@ class WxShare
     {
         $str = md5(uniqid(date("YmdHIs")));
         return substr($str,8,16);
-    }
-    
-    /**
-     * GET请求
-     * @param string $url
-     * @param array $params
-     *
-     * @return string
-     */
-    private function getRequest($url, $params = [])
-    {
-        $client = new Client(['timeout' => 5.0]);
-        $options = [];
-        if (!empty($params)) {
-            $options['query'] = $params;
-        }
-        $response = $client->request('GET', $url, $options);
-        $data = $response->getBody()->getContents();
-        return $data;
     }
 }

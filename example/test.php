@@ -6,7 +6,7 @@
  * Time: 下午10:59
  */
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $appId = "wx2be37a2e643c5daa";
 $appSecret = "23a10fb3c44d6039c796df600528dcdf";
