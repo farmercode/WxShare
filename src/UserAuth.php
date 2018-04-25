@@ -8,20 +8,20 @@
 
 namespace FCode\WxShare;
 
+use FCode\WxShare\Traits\Request;
 
-class UserAuth extends Request
+class UserAuth extends App
 {
+    use Request;
+    
     const OAUTH2_AUTH_URL = 'https://open.weixin.qq.com/connect/oauth2/authorize';
     const OAUTH2_ACCESS_TOKEN_URL = 'https://api.weixin.qq.com/sns/oauth2/access_token';
     
-    protected $appId;
-    protected $appSecret;
     protected $redirectUrl;
     
-    public function __construct($config = [])
+    protected function init($config)
     {
-        $this->appId = $config['app_id'];
-        $this->appSecret = $config['app_secret'];
+        parent::init($config);
         $this->redirectUrl = isset($config['redirect'])?$config['redirect'] : null;
     }
     

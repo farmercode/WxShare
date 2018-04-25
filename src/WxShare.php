@@ -9,6 +9,7 @@
 namespace FCode\WxShare;
 
 use GuzzleHttp\Client;
+use FCode\WxShare\Traits\Request;
 
 /**
  * Class WxShare
@@ -16,20 +17,12 @@ use GuzzleHttp\Client;
  * @author Wangchangchun
  * @package FCode
  */
-class WxShare extends Request
+class WxShare extends App
 {
+    use Request;
+    
     const API_GET_TOKEN = 'https://api.weixin.qq.com/cgi-bin/token';
     const API_GET_TICKET = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket';
-    
-    private $appId = '';
-    
-    private $secret = '';
-    
-    public function __construct($appId, $secret)
-    {
-        $this->appId = $appId;
-        $this->secret = $secret;
-    }
     
     /**
      * 获得微信分享签名数据

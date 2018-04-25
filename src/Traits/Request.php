@@ -2,16 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: king
- * Date: 2018/4/16
- * Time: 上午11:13
+ * Date: 2018/4/25
+ * Time: 上午9:54
  */
 
-namespace FCode\WxShare;
-
+namespace FCode\WxShare\Traits;
 
 use GuzzleHttp\Client;
 
-class Request
+trait Request
 {
     /**
      * GET请求
