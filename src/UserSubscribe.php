@@ -33,7 +33,6 @@ class UserSubscribe extends App
      */
     public function getPlatformToken()
     {
-        $this->getApiUrl(self::WP_GET_TOKEN_API);
         $params = [
             'grant_type' => 'client_credential',
             'appid' => $this->appId,

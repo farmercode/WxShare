@@ -62,6 +62,6 @@ class UserAuth extends App
         $params["code"]       = !empty($code)?$code : $_GET['code'];
         $params["grant_type"] = "authorization_code";
         $result = $this->getRequest(self::OAUTH2_ACCESS_TOKEN_URL, $params);
-        return $result;
+        return json_decode($result, true);
     }
 }
