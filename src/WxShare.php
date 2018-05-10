@@ -72,7 +72,7 @@ class WxShare extends App
         $params = [
             'grant_type' => 'client_credential',
             'appid' => $this->appId,
-            'secret' => $this->secret
+            'secret' => $this->appSecret
         ];
         $result = $this->getRequest(self::API_GET_TOKEN, $params);
         $data = json_decode($result, true);
