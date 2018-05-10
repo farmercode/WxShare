@@ -15,6 +15,8 @@ class App
     
     protected $appSecret;
     
+    const WP_GET_TOKEN_API = 'https://api.weixin.qq.com/cgi-bin/token';
+    
     public function __construct($config)
     {
         $this->appId     = $config['app_id'];
@@ -25,5 +27,20 @@ class App
     protected function init($config)
     {
     
+    }
+    
+    /**
+     * 获取平台token
+     * @return mixed
+     */
+    public function getPlatformToken()
+    {
+        $params = [
+            'grant_type' => 'client_credential',
+            'appid' => $this->appId,
+            'secret' => $this->appSecret
+        ];
+        $data = $this->getRequest(self::WP_GET_TOKEN_API, $params);
+        return json_decode($data, true);
     }
 }

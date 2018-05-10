@@ -19,28 +19,11 @@ class UserSubscribe extends App
 {
     use Request;
     
-    const WP_API_BASE = 'https://api.weixin.qq.com';
-    const WP_GET_TOKEN_API = self::WP_API_BASE.'/cgi-bin/token';
-    const WP_GET_USER_API = self::WP_API_BASE.'/cgi-bin/user/info';
+    const WP_GET_USER_API = 'https://api.weixin.qq.com/cgi-bin/user/info';
     
     protected $appId;
     
     protected $appSecret;
-    
-    /**
-     * 获取平台token
-     * @return mixed
-     */
-    public function getPlatformToken()
-    {
-        $params = [
-            'grant_type' => 'client_credential',
-            'appid' => $this->appId,
-            'secret' => $this->appSecret
-        ];
-        $data = $this->getRequest(self::WP_GET_TOKEN_API, $params);
-        return json_decode($data, true);
-    }
     
     /**
      * 获取用户信息
@@ -58,5 +41,21 @@ class UserSubscribe extends App
         ];
         $data = $this->getRequest(self::WP_GET_USER_API, $params);
         return json_decode($data, true);
+    }
+    
+    /**
+     * 获得微信用户信息
+     * @param string $openId
+     *
+     * @return bool|mixed
+     */
+    public function wechatUserInfo($openId)
+    {
+        $result = $this->getPlatformToken();
+        if (!isset($result['access_token'])) {
+            return false;
+        }
+        $user = $this->getUserInfo($result['access_token'], $openId);
+        return $user;
     }
 }

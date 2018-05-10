@@ -8,7 +8,6 @@
 
 namespace FCode\WxShare;
 
-use GuzzleHttp\Client;
 use FCode\WxShare\Traits\Request;
 
 /**
@@ -32,7 +31,7 @@ class WxShare extends App
      */
     public function getSign($url)
     {
-        $data = $this->getToken();
+        $data = $this->getPlatformToken();
         if (isset($data['errcode']) && $data['errcode'] > 0) {
             return $data;
         }
@@ -61,22 +60,6 @@ class WxShare extends App
                 'noncestr' => $input['noncestr'],
                 'appId' => $this->appId
         ];
-    }
-    
-    /**
-     * 获取微信接口所需token
-     * @return mixed
-     */
-    public function getToken()
-    {
-        $params = [
-            'grant_type' => 'client_credential',
-            'appid' => $this->appId,
-            'secret' => $this->appSecret
-        ];
-        $result = $this->getRequest(self::API_GET_TOKEN, $params);
-        $data = json_decode($result, true);
-        return $data;
     }
     
     /**
