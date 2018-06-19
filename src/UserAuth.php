@@ -33,13 +33,13 @@ class UserAuth extends App
         return $this->redirectUrl;
     }
     
-    public function getOAuthCodeUrl($isReturn = false, $scope = 'snsapi_userinfo')
+    public function getOAuthCodeUrl($isReturn = false, $scope = 'snsapi_userinfo', $state = "STATE")
     {
         $params["appid"]         = $this->appId;
         $params["redirect_uri"]  = $this->getRedirectUrl();
         $params["response_type"] = "code";
         $params["scope"]         = $scope;
-        $params["state"]         = "STATE#wechat_redirect";
+        $params["state"]         = "$state#wechat_redirect";
         $bizString               = http_build_query($params);
         $authUrl = self::OAUTH2_AUTH_URL."?".$bizString;
         if (!$isReturn) {
