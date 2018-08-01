@@ -42,6 +42,9 @@ class WxShare extends App
         }
         $ticket = $data['ticket'];
         $randomSlot = $this->genarateRandomString();
+        //去掉URL后#部分
+        $urlSlices = explode('#', $url);
+        $url = current($urlSlices);
         
         $input = [
             'jsapi_ticket' => $ticket,
